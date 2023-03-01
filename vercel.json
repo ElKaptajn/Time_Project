@@ -11,25 +11,5 @@
         "src": "/(.*)",
         "dest": "app.js"
       }
-    ],
-    "headers": [
-      {
-        "source": "/public/frontpage/style.css",
-        "headers": [
-          {
-            "key": "Content-Type",
-            "value": "text/css"
-          }
-        ]
-      },
-      {
-        "source": "/public/frontpage/frontpage.js",
-        "headers": [
-          {
-            "key": "Content-Type",
-            "value": "application/javascript"
-          }
-        ]
-      }
     ]
 }
