@@ -9,6 +9,85 @@
     <!-- LINKS -->
     <link rel="stylesheet" href="/frontpage/style.css">
 
+    <style>
+    body {
+        background: linear-gradient(to bottom, rgb(255, 123, 0), white);
+        color: black;
+        height: 100vh;
+        overflow: hidden;
+    }
+
+    h1, h2 {
+        display: flex;
+        justify-content: center;
+    }
+
+    h2 {
+        font-style: italic;
+        text-align: center;
+    }
+
+    h1 {
+    padding-top: 5vh;
+    }
+
+    button {
+        color: white;
+        background-color: black;
+        border: 0;
+        border-radius:  10px;
+        font-size: 25px;
+        cursor: pointer;
+        padding: 20px;
+    }
+
+    .form {
+        display: flex;
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #e78608;
+        border-radius: 5px;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+        align-content: center;
+        flex-direction: column;
+        text-align: center;
+        max-width: 20vw;
+        
+    }
+
+    .form label {
+        font-weight: bold;
+        font-size: 20px;
+    }
+
+    .form input {
+        margin-bottom: 25px;
+    }
+
+    .form-wrapper {
+        display: flex;
+        justify-content: center;
+    }
+
+    input[type="text"],
+    input[type="date"],
+    input[type="number"]
+    {
+    padding: 10px;
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    font-size: 20px;
+    }
+
+    input[type="date"] {
+    cursor: text;
+    }
+    </style>
+
 </head>
 <body>
     <h1>Find out when you will turn X years old!</h1>
@@ -29,7 +108,65 @@
 
     <div id="result-wrapper"></div>
 
-    <script src="/frontpage/frontpage.js"></script>
+    <script>
+        // DOM TAGS
+        const xBirthDayWrapper = document.getElementById("result-wrapper");
+        const result = document.createElement("h1");
+
+        // DATE ARRAYS
+        const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+        const monthWritten = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+
+        function calculateDate(){
+
+            const birthDay = new Date(document.getElementById("userInputBirthDay").value);
+            const name = document.getElementById("userInputName").value;
+            const ageToFind = Number(document.getElementById("userInputAge").value);
+
+            const xBirthDay = calculateYearWhenTurnX(birthDay, ageToFind);
+
+            //Variable for storing the number ending 
+            let numberEnding = "";
+
+            //Switch statement for finding the correct number ending
+         switch (xBirthDay.getDate()) {
+            case 1: 
+                numberEnding = "st";
+                break;
+            case 2:
+                numberEnding = "nd";
+                break;
+            case 3: 
+                numberEnding = "rd";
+                break;
+            default:
+                numberEnding = "th";
+           }
+
+        //Contructing the result string to be displayed
+            result.innerText =
+                name + " will be " + ageToFind + " years old on " + 
+                weekday[xBirthDay.getDay()] + " the " + xBirthDay.getDate() + "" + numberEnding + " of " +
+                monthWritten[xBirthDay.getMonth()] + " " + xBirthDay.getFullYear();
+
+        //If statement for checking if the result is already on the page
+            if (xBirthDayWrapper.hasChildNodes()) {
+                xBirthDayWrapper.removeChild(xBirthDayWrapper.firstChild);
+                xBirthDayWrapper.appendChild(result);
+            } else {
+                xBirthDayWrapper.appendChild(result);
+            }
+            event.preventDefault();
+
+        };
+
+        function calculateYearWhenTurnX(dateOfBirth, ageToFind) {
+            event.preventDefault();
+            const yearWhenTurnX = (dateOfBirth.getFullYear() + ageToFind);
+            return new Date(yearWhenTurnX, dateOfBirth.getMonth(), dateOfBirth.getDate());
+        }
+
+    </script>
     
 </body>
 </html>
