@@ -4,19 +4,16 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>When will I turn 100?</title>
+    <title>When will I turn X years old?</title>
 
     <!-- LINKS -->
     <link rel="stylesheet" href="./frontpage/style.css">
 
 </head>
 <body>
+    <h1>Find out when you will turn X years old!</h1>
 
-    <h1>Find out when you will turn 100 years!</h1>
-
-    <h2>Enter your name and date of birth</h2>
-
- 
+    <h2>Enter your name and date of birth, as well as the age you are interested in knowing when you will turn,<br>and we will determine the year in which you will reach that age.</h2>
 
     <div class="form-wrapper">
         <form class="form">
@@ -24,7 +21,9 @@
             <input id="userInputName" type="text">
             <label for="userInputBirthDay">Day of birth:</label>
             <input type="date" name="" id="userInputBirthDay" required>
-            <button onclick="calculateDate()">Let's see!</button>
+            <label for="userInputAge">Age:</label>
+            <input type="number" name="" id="userInputAge" required>
+            <button onclick="calculateDate()">Let's find out!</button>
         </form>
     </div>
 

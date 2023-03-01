@@ -1,20 +1,24 @@
+// DOM TAGS
+const xBirthDayWrapper = document.getElementById("result-wrapper");
+const result = document.createElement("h1");
+
+// DATE ARRAYS
 const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
 const monthWritten = ["January","February","March","April","May","June","July","August","September","October","November","December"];
-
-const hundredthBirthdayWrapper = document.getElementById("result-wrapper");
 
 function calculateDate(){
 
     const birthDay = new Date(document.getElementById("userInputBirthDay").value);
     const name = document.getElementById("userInputName").value;
+    const ageToFind = Number(document.getElementById("userInputAge").value);
 
-    const hundredthBirthdayYear = birthDay.getFullYear() + 100;
-    const hundredthBirthday = new Date(hundredthBirthdayYear, birthDay.getMonth(), birthDay.getDate());
+    const xBirthDay = calculateYearWhenTurnX(birthDay, ageToFind);
 
-    const hundredthBirthdayDate = hundredthBirthday.getDay();
+    //Variable for storing the number ending 
     let numberEnding = "";
 
-   switch (hundredthBirthdayDate) {
+    //Switch statement for finding the correct number ending
+   switch (xBirthDay.getDate()) {
     case 1: 
         numberEnding = "st";
         break;
@@ -28,18 +32,25 @@ function calculateDate(){
         numberEnding = "th";
    }
 
-    const result = document.createElement("h1");
+   //Contructing the result string to be displayed
     result.innerText =
-        name + " will be 100 years old on " + 
-        weekday[hundredthBirthday.getDay()] + " the " + hundredthBirthday.getDay() + numberEnding + " of " +
-        monthWritten[hundredthBirthday.getMonth()] + " " + hundredthBirthday.getFullYear();
+        name + " will be " + ageToFind + " years old on " + 
+        weekday[xBirthDay.getDay()] + " the " + xBirthDay.getDate() + "" + numberEnding + " of " +
+        monthWritten[xBirthDay.getMonth()] + " " + xBirthDay.getFullYear();
 
-    if (hundredthBirthdayWrapper.hasChildNodes()) {
-        hundredthBirthdayWrapper.removeChild(hundredthBirthdayWrapper.firstChild);
-        hundredthBirthdayWrapper.appendChild(result);
+   //If statement for checking if the result is already on the page
+    if (xBirthDayWrapper.hasChildNodes()) {
+        xBirthDayWrapper.removeChild(xBirthDayWrapper.firstChild);
+        xBirthDayWrapper.appendChild(result);
       } else {
-        hundredthBirthdayWrapper.appendChild(result);
+        xBirthDayWrapper.appendChild(result);
       }
+      event.preventDefault();
 
-    event.preventDefault();
 };
+
+function calculateYearWhenTurnX(dateOfBirth, ageToFind) {
+    event.preventDefault();
+    const yearWhenTurnX = (dateOfBirth.getFullYear() + ageToFind);
+    return new Date(yearWhenTurnX, dateOfBirth.getMonth(), dateOfBirth.getDate());
+  }

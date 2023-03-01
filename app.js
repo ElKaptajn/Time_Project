@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 
-app.use(express.static("public"));  //For security - makes all the files in the public-folder public for everybody
+app.use(express.static("public")); 
 
 const PORT = 8080;
 
